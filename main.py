@@ -9,10 +9,10 @@ screen.tracer(0)
 
 player = Player()
 car = CarManager()
+score = Scoreboard()
 
 screen.listen()
 screen.onkey(player.go_up, "Up")
-
 
 
 game_is_on = True
@@ -22,5 +22,16 @@ while game_is_on:
     car.new_car()
     car.move()
 
-    # detect collission
-    for car in car.all_cars:
+    # detect collision
+    for cars in car.all_cars:
+        if player.distance(cars) < 20:
+            score.over()
+            game_is_on = False
+
+    # detect when layer reach top
+    if player.ycor() > 280:
+        player.reset_player()
+        score.increase_level()
+        car.increase_speed()
+
+screen.exitonclick()
