@@ -29,7 +29,7 @@ while game_is_on:
             game_is_on = False
 
     # detect when layer reach top
-    if player.ycor() > 280:
+    if player.is_at_finish():
         player.reset_player()
         score.increase_level()
         car.increase_speed()
