@@ -8,12 +8,19 @@ screen.setup(width=600, height=600)
 screen.tracer(0)
 
 player = Player()
+car = CarManager()
 
 screen.listen()
-screen.onkey(player.go_up(), "Up")
+screen.onkey(player.go_up, "Up")
+
 
 
 game_is_on = True
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+    car.new_car()
+    car.move()
+
+    # detect collission
+    for car in car.all_cars:
